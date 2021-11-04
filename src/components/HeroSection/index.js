@@ -1,7 +1,10 @@
-import { Box, Center, Container, Flex, Text } from "@chakra-ui/react";
-import React from "react";
+import { Box, Flex, Text } from "@chakra-ui/react";
+import React, { useEffect } from "react";
 
 const HeroSection = () => {
+  useEffect(() => {
+    console.log(localStorage.getItem("uuid"));
+  });
   return (
     <div style={{ padding: 10 }}>
       <Flex height="60vh">

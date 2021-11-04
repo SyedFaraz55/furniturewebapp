@@ -3,11 +3,9 @@ import React from "react";
 import {
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Input,
   Textarea,
-  Button
+  Button,
 } from "@chakra-ui/react";
 
 const Contact = () => {
@@ -23,7 +21,9 @@ const Contact = () => {
   return (
     <Container>
       <div style={styles}>
-      <Heading as="h5" style={{marginBottom:15}}>Contact Us</Heading>
+        <Heading as="h5" style={{ marginBottom: 15 }}>
+          Contact Us
+        </Heading>
         <p>
           We are here to help! Just send us an email, call us or use the form
           below to get in touch. Our office hours are 10 am - 5 pm GMT+1 (6 am -
@@ -31,24 +31,28 @@ const Contact = () => {
         </p>
       </div>
       <div>
-        <FormControl id="name" style={{marginTop:30}} isRequired >
+        <FormControl id="name" style={{ marginTop: 30 }} isRequired>
           <FormLabel>Name</FormLabel>
           <Input type="text" />
         </FormControl>
 
-        <FormControl id="email" style={{marginTop:30}}>
+        <FormControl id="email" style={{ marginTop: 30 }}>
           <FormLabel>Email address</FormLabel>
           <Input type="email" />
         </FormControl>
-        <FormControl id="contact" style={{marginTop:30}} isRequired>
+        <FormControl id="contact" style={{ marginTop: 30 }} isRequired>
           <FormLabel>Contact Number</FormLabel>
-          <Input type="text"  />
+          <Input type="text" />
         </FormControl>
-        <FormControl id="Message" style={{marginTop:30}}>
+        <FormControl id="Message" style={{ marginTop: 30 }}>
           <FormLabel>Message</FormLabel>
           <Textarea rows="10" cols="10" />
         </FormControl>
-        <Button  style={{marginTop:10,backgroundColor:"black", color:"white"}}>Submit</Button>
+        <Button
+          style={{ marginTop: 10, backgroundColor: "black", color: "white" }}
+        >
+          Submit
+        </Button>
       </div>
     </Container>
   );

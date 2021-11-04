@@ -1,16 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import AppNavigator from './Routes'
-
-import {ChakraProvider} from '@chakra-ui/react'
+import AppNavigator from "./Routes";
+import firbase from "./config/firebase";
+import { ChakraProvider } from "@chakra-ui/react";
+import { StoreProvider } from "easy-peasy";
+import store from "./store";
 class App extends React.Component {
   render() {
     return (
-    <ChakraProvider>
-      <AppNavigator />
-    </ChakraProvider>
-      );
+      <StoreProvider store={store}>
+        <ChakraProvider>
+          <AppNavigator />
+        </ChakraProvider>
+      </StoreProvider>
+    );
   }
 }
 

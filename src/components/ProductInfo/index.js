@@ -4,13 +4,11 @@ import { CgShoppingCart } from "react-icons/cg";
 
 const ProductInfo = () => {
   return (
-    <div className="p-grid" style={{marginTop:10}}>
+    <div className="p-grid" style={{ marginTop: 10 }}>
       <div>
         <p className="p-title">L-Shape Sofa</p>
-        <p className="row" >
-          <span >
-            <BiRupee />
-          </span>
+        <p style={{ display: "flex", alignItems: "center" }}>
+          <BiRupee />
           <span>12,000</span>
         </p>
       </div>

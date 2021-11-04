@@ -8,6 +8,7 @@ import InfoSection from "./InfoSection";
 import Footer from "./Footer";
 
 import "../style.css";
+
 const App = () => {
   return (
     <>
