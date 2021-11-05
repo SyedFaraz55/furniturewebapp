@@ -46,9 +46,9 @@ const Header = (props) => {
           className="navbar"
         >
           <Link to="/">Home</Link>
-          <Link>Shop</Link>
+          <Link to="/shop">Shop</Link>
           <Link to="/contact">Contact</Link>
-          <Link>Cart (0)</Link>
+          <Link to="/cart">Cart (0)</Link>
           {localStorage.getItem("supabase.auth.token") ? (
             <Logout />
           ) : (
