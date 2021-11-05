@@ -6,8 +6,8 @@ const Featured = () => {
     <div className="tagline">
       <div>
         <h3>
-          <span>Great deals for</span>
-          <span>great prices </span>
+          Great deals for
+          great prices 
         </h3>
       </div>
 

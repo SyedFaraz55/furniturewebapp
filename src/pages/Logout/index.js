@@ -11,7 +11,7 @@ const Logout = (props) => {
   const logout = () => {
     setState("");
     localStorage.removeItem("supabase.auth.token");
-    return <Redirect to="/" />;
+    window.location.href = '/'
   };
 
   return (

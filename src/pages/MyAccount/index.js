@@ -7,17 +7,7 @@ const MyAccount = () => {
   const [value, setChange] = useState(true);
   return (
     <Container>
-      {value ? <LoginForm /> : <SignUpForm />}
-      <div>
-        <Flex style={{marginTop:20}}>
-          <Link to="/account" style={{marginRight:10}} onClick={() => setChange(!value)}>
-            Create an account
-          </Link> |
-          <Link to="/account" style={{marginLeft:10}} onClick={() => alert('resetting password')}>
-            Forgot Password ?
-          </Link>
-        </Flex>
-      </div>
+     <h1>Account </h1> 
     </Container>
   );
 };

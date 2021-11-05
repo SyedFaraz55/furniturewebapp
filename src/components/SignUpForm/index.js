@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
   FormControl,
   FormLabel,
@@ -13,27 +13,32 @@ import {
   Center,
 } from "@chakra-ui/react";
 import supabase from "../../config/supabase.config";
-const SignUpForm = () => {
+import {Redirect,useHistory} from 'react-router-dom'
+const SignUpForm = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
-  const login = () => {
+  const history = useHistory();
+  useEffect(()=> {
+    if(localStorage.getItem('supabase.auth.token')) {
+      history.push('/')
+    }
+   },[])
+  const login = async () => {
     setLoading(true);
     if (email === "" || password === "") {
       setErrors({ message: "Invalid Email or Password" });
       setLoading(false);
     } else {
-      supabase.auth
-        .signIn({ email, password })
-        .then((response) => {
-          console.log(response);
-          setLoading(false);
-        })
-        .catch((err) => {
-          setErrors(err.toString());
-          setLoading(false);
-        });
+
+      const {data,error} = await supabase.auth.signIn({email,password})
+      if(error) {
+        setErrors({message:error})
+      }
+      if(data.user) {
+        window.location.href = '/'
+      }
     }
   };
   return (
