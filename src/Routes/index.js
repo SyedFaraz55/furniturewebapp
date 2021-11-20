@@ -12,7 +12,6 @@ import Cart from '../pages/Cart'
 import ProtectedRoute from '../components/ProtectedRoute'
 import "../style.css";
 
-import NotFound from "../components/NotFound";
 const Routes = () => {
   useLayoutEffect(() => {
     console.log(localStorage.getItem("uuid"), "header");
