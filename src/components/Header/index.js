@@ -1,4 +1,4 @@
-import { Box, Stack, Flex, useDisclosure } from "@chakra-ui/react";
+import { Box, Stack, Flex, useDisclosure, Divider } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import craftt from "../../resources/craftt.svg";
@@ -61,6 +61,8 @@ const Header = (props) => {
           mt={{ base: 4, md: 0 }}
         ></Box>
       </Flex>
+
+      <Divider />
     </>
   );
 };

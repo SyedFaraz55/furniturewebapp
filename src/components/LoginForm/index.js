@@ -16,9 +16,9 @@ import firebase from "firebase";
 import firebaseConfig from "../../config/firebase";
 import supabase from "../../config/supabase.config";
 
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-const LoginForm = (props) => {
+const LoginForm = () => {
   const [mobile, setMobile] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,11 +27,11 @@ const LoginForm = (props) => {
   const history = useHistory();
   let [error, setError] = useState({});
   let [info, setInfo] = useState({});
- useEffect(()=> {
-  if(localStorage.getItem('supabase.auth.token')) {
-    history.push('/')
-  }
- },[])
+  useEffect(() => {
+    if (localStorage.getItem("supabase.auth.token")) {
+      history.push("/");
+    }
+  }, []);
   const configureCaptcha = () => {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
       "sign-in-button",
