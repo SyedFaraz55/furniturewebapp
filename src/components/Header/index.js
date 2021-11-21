@@ -3,14 +3,14 @@ import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import craftt from "../../resources/craftt.svg";
 
-import { useStoreState } from "easy-peasy";
+
 import Logout from "../../pages/Logout";
 import { useCart } from "react-use-cart";
 
 const Header = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleToggle = () => (isOpen ? onClose() : onOpen());
-  const { items, emptyCart } = useCart();
+  const { items } = useCart();
 
   return (
     <>
