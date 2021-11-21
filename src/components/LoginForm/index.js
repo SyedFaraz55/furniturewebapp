@@ -31,7 +31,7 @@ const LoginForm = () => {
     if (localStorage.getItem("supabase.auth.token")) {
       history.push("/");
     }
-  }, []);
+  }, [history]);
   const configureCaptcha = () => {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
       "sign-in-button",

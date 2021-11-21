@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/button";
 
 import React, { useEffect, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Logout = (props) => {
   const [state, setState] = useState("");
@@ -11,7 +11,7 @@ const Logout = (props) => {
   const logout = () => {
     setState("");
     localStorage.removeItem("supabase.auth.token");
-    window.location.href = '/'
+    window.location.href = "/";
   };
 
   return (

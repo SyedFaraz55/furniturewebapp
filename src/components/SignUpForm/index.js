@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FormControl,
   FormLabel,
@@ -13,31 +13,34 @@ import {
   Center,
 } from "@chakra-ui/react";
 import supabase from "../../config/supabase.config";
-import {Redirect,useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
+import { useStoreActions } from "easy-peasy";
 const SignUpForm = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
+  const setUser = useStoreActions((actions) => actions.setUser);
   const history = useHistory();
-  useEffect(()=> {
-    if(localStorage.getItem('supabase.auth.token')) {
-      history.push('/')
+  useEffect(() => {
+    if (localStorage.getItem("supabase.auth.token")) {
+      history.push("/");
     }
-   },[])
+  }, [history]);
   const login = async () => {
     setLoading(true);
     if (email === "" || password === "") {
       setErrors({ message: "Invalid Email or Password" });
       setLoading(false);
     } else {
-
-      const {data,error} = await supabase.auth.signIn({email,password})
-      if(error) {
-        setErrors({message:error})
-      }
-      if(data.user) {
-        window.location.href = '/'
+      const { data, error } = await supabase.auth.signIn({ email, password });
+      if (error) {
+        setErrors({ message: error.message });
+        setLoading(false);
+      } else if (data.user) {
+        setUser(data.user);
+        window.location.href = "/";
+        setLoading(false);
       }
     }
   };

@@ -1,22 +1,22 @@
-import React, { useLayoutEffect } from "react";
-import { BrowserRouter, Route,  } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Route } from "react-router-dom";
 import Home from "../components/App";
 import Header from "../components/Header";
 import LoginForm from "../components/LoginForm";
 import SignUpForm from "../components/SignUpForm";
 import Contact from "../pages/Contact";
 import Logout from "../pages/Logout";
+import Checkout from "../pages/Checkout";
 import MyAccount from "../pages/MyAccount";
-import Shop from '../components/Shop'
-import Cart from '../pages/Cart'
-import ProtectedRoute from '../components/ProtectedRoute'
+import Shop from "../components/Shop";
+import Cart from "../pages/Cart";
+import ProtectedRoute from "../components/ProtectedRoute";
 import "../style.css";
-
-import NotFound from "../components/NotFound";
+import Footer from "../components/Footer";
+import { withRouter } from "react-router";
 const Routes = () => {
-  useLayoutEffect(() => {
-    console.log(localStorage.getItem("uuid"), "header");
-  });
+  const WithFooter = withRouter(Footer);
+
   return (
     <>
       <BrowserRouter>
@@ -27,11 +27,12 @@ const Routes = () => {
         <Route path="/shop" exact component={Shop} />
         <Route path="/cart" exact component={Cart} />
 
-            <Route path="/signup" exact component={LoginForm} />
-            <Route path="/login" exact component={SignUpForm} />
+        <Route path="/signup" exact component={LoginForm} />
+        <Route path="/login" exact component={SignUpForm} />
 
         <Route path="/logout" exact component={Logout} />
-
+        <ProtectedRoute path="/checkout" exact component={Checkout} />
+        <WithFooter />
       </BrowserRouter>
     </>
   );

@@ -1,17 +1,17 @@
-import { Box, Stack, Flex, useDisclosure, Divider } from "@chakra-ui/react";
+import { Box, Stack, Flex, useDisclosure } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import craftt from "../../resources/craftt.svg";
 
 import { useStoreState } from "easy-peasy";
 import Logout from "../../pages/Logout";
+import { useCart } from "react-use-cart";
 
 const Header = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleToggle = () => (isOpen ? onClose() : onOpen());
+  const { items, emptyCart } = useCart();
 
-  const user = useStoreState((state) => state.user);
-  console.log(user, "user");
   return (
     <>
       <Flex
@@ -48,7 +48,7 @@ const Header = (props) => {
           <Link to="/">Home</Link>
           <Link to="/shop">Shop</Link>
           <Link to="/contact">Contact</Link>
-          <Link to="/cart">Cart (0)</Link>
+          <Link to="/cart">Cart ({items.length})</Link>
           {localStorage.getItem("supabase.auth.token") ? (
             <Logout />
           ) : (
@@ -61,8 +61,6 @@ const Header = (props) => {
           mt={{ base: 4, md: 0 }}
         ></Box>
       </Flex>
-
-      <Divider />
     </>
   );
 };

@@ -5,18 +5,18 @@ import ShowCase from "./ShowCase";
 import Featured from "./Featured";
 import InfoSection from "./InfoSection";
 
-import Footer from "./Footer";
-
+import { useStoreState } from "easy-peasy";
 import "../style.css";
 
 const App = () => {
+  const user = useStoreState((state) => state.user);
+  console.log(user, "from store >>");
   return (
     <>
       <HeroSection />
       <ShowCase />
       <Featured />
       <InfoSection />
-      <Footer />
     </>
   );
 };
