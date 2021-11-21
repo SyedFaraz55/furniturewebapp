@@ -2,8 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import AppNavigator from "./Routes";
-import firbase from "./config/firebase";
-import { ChakraProvider, StylesProvider } from "@chakra-ui/react";
+
+import { ChakraProvider } from "@chakra-ui/react";
 import { StoreProvider } from "easy-peasy";
 import store from "./store";
 import { CartProvider } from "react-use-cart";
