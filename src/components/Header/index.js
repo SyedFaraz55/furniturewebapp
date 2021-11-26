@@ -3,14 +3,13 @@ import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import craftt from "../../resources/craftt.svg";
 
-import { useStoreState } from "easy-peasy";
 import Logout from "../../pages/Logout";
 import { useCart } from "react-use-cart";
 
 const Header = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleToggle = () => (isOpen ? onClose() : onOpen());
-  const { items, emptyCart } = useCart();
+  const { items } = useCart();
 
   return (
     <>
@@ -47,7 +46,8 @@ const Header = (props) => {
         >
           <Link to="/">Home</Link>
           <Link to="/shop">Shop</Link>
-          <Link to="/contact">Contact</Link>
+          <Link to="/contact">Custom Request</Link>
+          <Link to="/account">My Account</Link>
           <Link to="/cart">Cart ({items.length})</Link>
           {localStorage.getItem("supabase.auth.token") ? (
             <Logout />

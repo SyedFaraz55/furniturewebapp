@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import PageHeader from "../../Common/PageHeader";
 import Filter from "../../Common/Filter";
-import { Box } from "@chakra-ui/layout";
-import { useToast } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/layout";
+import {
+  useToast,
+  useDisclosure,
+  Drawer,
+  DrawerBody,
+  DrawerOverlay,
+  DrawerContent,
+  Text,
+  Button,
+  Divider,
+  Flex,
+  UnorderedList,
+  ListItem,
+} from "@chakra-ui/react";
+import { IoIosAdd } from "react-icons/io";
+import { AiOutlineMinus } from "react-icons/ai";
 import { useCart } from "react-use-cart";
 import ProductCard from "../ProductCard";
 import product1 from "../../resources/products/product1.jpeg";
@@ -14,6 +29,7 @@ import product5 from "../../resources/products/product5.jpeg";
 import product6 from "../../resources/products/product6.jpeg";
 import product7 from "../../resources/products/product7.jpeg";
 import product8 from "../../resources/products/product8.jpeg";
+
 const products = [
   {
     id: 1,
@@ -77,8 +93,17 @@ const products = [
   },
 ];
 const Shop = () => {
-  const { addItem } = useCart();
+  const [size, setSize] = React.useState("full");
+  const [current, setCurrent] = React.useState({});
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const { addItem, items } = useCart();
   const toast = useToast();
+
+  useEffect(() => {
+    console.log(items);
+  }, [items]);
+
   return (
     <div>
       <PageHeader title="Craftt Shop" />
@@ -87,9 +112,13 @@ const Shop = () => {
         {products.map((product) => {
           return (
             <ProductCard
+              onClick={() => {
+                onOpen();
+                setCurrent(product);
+              }}
               key={product._id}
               {...product}
-              onClick={() => {
+              addCart={() => {
                 addItem(product);
                 toast({
                   position: "bottom-left",
@@ -102,6 +131,105 @@ const Shop = () => {
           );
         })}
       </Box>
+      <Drawer onClose={onClose} isOpen={isOpen} size={size}>
+        <DrawerOverlay />
+        <DrawerContent padding={6}>
+          <DrawerBody mt={10}>
+            <Flex>
+              <Box>
+                <img
+                  style={{ width: 600 }}
+                  src={current.image}
+                  alt={current.name}
+                />
+              </Box>
+              <Box ml={10}>
+                <Heading as="h5">{current.name}</Heading>
+                <Text mt={2} style={{ fontSize: 24 }}>
+                  Rs.{" "}
+                  {current?.price?.toLocaleString(navigator.language, {
+                    minimumFractionDigits: 2,
+                  })}
+                </Text>
+                <Flex alignItems="center" mt={4}>
+                  <Button
+                    borderRadius="full"
+                    color="blackAlpha.900"
+                    size="xs"
+                    onClick={() => {
+                      setCurrent((prevState) => ({
+                        ...prevState,
+                        quantity: current["quantity"]
+                          ? (current["quantity"] += 1)
+                          : (current["quantity"] = 1),
+                      }));
+                    }}
+                  >
+                    <IoIosAdd size={15} />
+                  </Button>{" "}
+                  <Text ml={2} mr={2}>
+                    {current.quantity || 0}
+                  </Text>
+                  <Button
+                    borderRadius="full"
+                    color="blackAlpha.900"
+                    size="xs"
+                    onClick={() => {
+                      setCurrent((prevState) => ({
+                        ...prevState,
+                        quantity: current["quantity"]
+                          ? (current["quantity"] -= 1)
+                          : (current["quantity"] = 1),
+                      }));
+                    }}
+                  >
+                    <AiOutlineMinus size={15} />
+                  </Button>
+                </Flex>
+                <Button
+                  onClick={() => {
+                    if (current.quantity) {
+                      addItem(current);
+                      toast({
+                        title: "Item added to cart",
+                        status: "success",
+                      });
+                    } else {
+                      toast({
+                        title: "Please a product to cart",
+                        status: "error",
+                        position: "top",
+                      });
+                    }
+                  }}
+                  mt={5}
+                  variant="outline"
+                >
+                  Add to Cart
+                </Button>
+                <Text mt={3} fontSize={25} mb={3}>
+                  Description
+                </Text>
+                <Divider />
+                <Box width={650}>
+                  <Text mt={3}>
+                    Everyone needs a nook of one’s own, and our lovable
+                    high-backed chair is just that. Rolled arms and a curvy
+                    frame give a wink of personality, while a soft seat cushion
+                    invites you to stay a while.
+                  </Text>
+                  <UnorderedList mt={4}>
+                    <ListItem>Lorem ipsum dolor sit amet</ListItem>
+                    <ListItem>Consectetur adipiscing elit</ListItem>
+                    <ListItem>Integer molestie lorem at massa</ListItem>
+                    <ListItem>Facilisis in pretium nisl aliquet</ListItem>
+                  </UnorderedList>
+                </Box>
+              </Box>
+            </Flex>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
     </div>
   );
 };
