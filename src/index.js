@@ -7,6 +7,8 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { StoreProvider } from "easy-peasy";
 import store from "./store";
 import { CartProvider } from "react-use-cart";
+import { StripeProvider } from "react-stripe-elements";
+
 class App extends React.Component {
   render() {
     return (

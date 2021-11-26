@@ -41,12 +41,6 @@ const products = [
     price: "19,500",
     image: "../resources/products/product7.jpeg",
   },
-  {
-    _id: 6,
-    name: "4 Chair dining table",
-    price: "22,500",
-    image: "../resources/products/product8.jpeg",
-  },
 ];
 
 export default products;

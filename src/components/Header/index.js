@@ -47,7 +47,8 @@ const Header = (props) => {
         >
           <Link to="/">Home</Link>
           <Link to="/shop">Shop</Link>
-          <Link to="/contact">Contact</Link>
+          <Link to="/contact">Custom Request</Link>
+          <Link to="/account">My Account</Link>
           <Link to="/cart">Cart ({items.length})</Link>
           {localStorage.getItem("supabase.auth.token") ? (
             <Logout />
