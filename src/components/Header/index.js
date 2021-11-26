@@ -3,6 +3,7 @@ import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import craftt from "../../resources/craftt.svg";
 
+
 import Logout from "../../pages/Logout";
 import { useCart } from "react-use-cart";
 
