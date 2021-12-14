@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Flex,
@@ -17,16 +17,87 @@ import {
 import { BiRupee } from "react-icons/bi";
 import { useCart } from "react-use-cart";
 import { Formik } from "formik";
-import StripeCheckout from "react-stripe-checkout";
+import axios from "axios";
+import { Redirect, Route } from "react-router-dom";
+
+import supabase from "../../config/supabase.config";
 
 const CheckOut = () => {
   const [subTotal, setSubTotal] = React.useState(0);
   const { items, removeItem } = useCart();
-  const handleSubmit = async (e, values) => {
+  const [user, setUser] = useState(null);
+  const [details, setDetails] = React.useState();
+  React.useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    setUser(user);
+  }, []);
+  const handleSubmit = (e, values) => {
+    setDetails(values);
     e.preventDefault();
+    if (
+      values.email == "" ||
+      values.fname == "" ||
+      values.address == "" ||
+      values.city == "" ||
+      values.mobile == "" ||
+      values.state == ""
+    ) {
+      alert("required");
+    } else {
+      displayRazorPay();
+    }
   };
-  const onToken = (token) => {
-    console.log(token, "token");
+
+  const loadRazorPay = () => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  };
+
+  const displayRazorPay = async () => {
+    const res = await loadRazorPay();
+    if (!res) {
+      alert("SDK failed to load");
+      return;
+    }
+    const data = await axios
+      .post("http://localhost:8080/razorpay", {
+        amount: subTotal,
+        items: items,
+        name: details?.fname,
+        mobile: details?.mobile,
+        city: details?.city,
+        email: user.email,
+        userid: user.id,
+      })
+      .then((res) => res.data)
+      .catch((err) => console.log(err.toString()));
+    console.log(data, "data");
+    var options = {
+      key: "rzp_test_LkuPPQeixSkEX2",
+      amount: data.amount,
+      currency: data.currency,
+      name: "Craftt Furniture",
+      test: "match",
+      description: "Craftt Furniture Transaction",
+      order_id: data.id,
+      userid: localStorage.getItem("user").id,
+      handler: function (response) {
+        window.location.href = "/success";
+      },
+    };
+
+    const payment = new window.Razorpay(options);
+    payment.open();
   };
 
   React.useEffect(() => {
@@ -43,7 +114,6 @@ const CheckOut = () => {
           <Formik
             initialValues={{
               email: "",
-
               fname: "",
               lname: "",
               address: "",
@@ -54,8 +124,18 @@ const CheckOut = () => {
               state: "",
               save: false,
             }}
+            validate={(values) => {
+              const errors = {};
+              if (!values.email) {
+                errors.email = "Required";
+              } else if (
+                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+              ) {
+                errors.email = "Invalid email address";
+              }
+            }}
           >
-            {({ handleChange, values }) => (
+            {({ handleChange, values, errors }) => (
               <form onSubmit={(e) => handleSubmit(e, values)}>
                 <Box>
                   <Text fontSize="2xl" mb={5}>
@@ -199,11 +279,11 @@ const CheckOut = () => {
                     </FormControl>
                   </Flex>
 
-                  <Checkbox onChange={handleChange} name="save" mt={3}>
+                  {/* <Checkbox onChange={handleChange} name="save" mt={3}>
                     Save this information for next time
-                  </Checkbox>
+                  </Checkbox> */}
                   <br />
-                  <Button type="submit" variant="solid" size="lg" mt={4}>
+                  <Button type="submit" variant="solid" size="lg">
                     Continue to Shipping
                   </Button>
                 </Box>
@@ -272,13 +352,14 @@ const CheckOut = () => {
             })}
         </Box>
       </Flex>
-      <StripeCheckout
+
+      {/* <StripeCheckout
         token={onToken}
-        stripeKey="pk_test_DfpfAn6i3etX3z61vcAsCGcj"
+        stripeKey="pk_live_51Jy9uMSIaBscaTWfm8dAukzQyZhEP5YWWMioFl1EFjcMblSFHAh2SV2emxg6vINjVdDCIiJKAeT102IyGu0baJgT00yfQxwsN3"
         name="Craftt Furniture"
-        amount={subTotal * 100}
+        amount={1 * 100}
         currency="INR"
-      />
+      /> */}
     </>
   );
 };

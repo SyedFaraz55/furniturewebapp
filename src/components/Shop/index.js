@@ -29,6 +29,10 @@ import product5 from "../../resources/products/product5.jpeg";
 import product6 from "../../resources/products/product6.jpeg";
 import product7 from "../../resources/products/product7.jpeg";
 import product8 from "../../resources/products/product8.jpeg";
+import Commerce from "@chec/commerce.js";
+const commerce = new Commerce(
+  "pk_test_36356e81ff0bc6c1d6f99e5eccc2450557146ccab646f"
+);
 
 
 const commerce = new Commerce('pk_test_36356e81ff0bc6c1d6f99e5eccc2450557146ccab646f')
@@ -36,7 +40,7 @@ const products = [
   {
     id: 1,
     name: "Grey and black moshi fabric",
-    price: 19600,
+    price: 1,
     image: product1,
     category: "sofa",
   },
@@ -102,9 +106,14 @@ const Shop = () => {
   const { addItem, items } = useCart();
   const toast = useToast();
 
-  useEffect(() => {
-    commerce.products.list().then(products => console.log(products.data))
-  }, []);
+  useEffect(() => 
+    console.log(items);
+    commerce.products.list().then((product) => console.log(product));
+  }, [items]);
+
+  const handleSubmit = () => {
+    console.log("hit ");
+  };
 
   return (
     <div>

@@ -16,7 +16,8 @@ import firebase from "firebase";
 
 import supabase from "../../config/supabase.config";
 
-import { Link, useHistory } from "react-router-dom";
+
+import { useHistory, Link } from "react-router-dom";
 
 
 const LoginForm = () => {
@@ -110,7 +111,7 @@ const LoginForm = () => {
   }
 
   return (
-    <Container>
+    <Container height="50vh">
       <Heading as="h1">Sign Up</Heading>
 
       <FormControl id="name" style={{ marginTop: 30 }} isRequired>
@@ -205,7 +206,11 @@ const LoginForm = () => {
             Create Account
           </Button>
 
-          <Link style={{marginLeft:15}} to="/login" >Already an account ? Login</Link>
+
+          <Link to="/login" variant="link" style={{ marginLeft: 20 }}>
+            Already have an account ? Login
+          </Link>
+
         </Flex>
       )}
       <div id="sign-in-button"></div>
