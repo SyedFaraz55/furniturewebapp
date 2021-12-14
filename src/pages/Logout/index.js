@@ -3,7 +3,7 @@ import { Button } from "@chakra-ui/button";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Logout = (props) => {
+const Logout = () => {
   const [state, setState] = useState("");
   useEffect(() => {
     setState(localStorage.getItem("supabase.auth.token"));
