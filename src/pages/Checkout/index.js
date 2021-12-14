@@ -10,7 +10,6 @@ import {
   Input,
   InputGroup,
   Select,
-  Checkbox,
   FormLabel,
   FormControl,
 } from "@chakra-ui/react";
@@ -18,9 +17,6 @@ import { BiRupee } from "react-icons/bi";
 import { useCart } from "react-use-cart";
 import { Formik } from "formik";
 import axios from "axios";
-import { Redirect, Route } from "react-router-dom";
-
-import supabase from "../../config/supabase.config";
 
 const CheckOut = () => {
   const [subTotal, setSubTotal] = React.useState(0);
@@ -35,12 +31,12 @@ const CheckOut = () => {
     setDetails(values);
     e.preventDefault();
     if (
-      values.email == "" ||
-      values.fname == "" ||
-      values.address == "" ||
-      values.city == "" ||
-      values.mobile == "" ||
-      values.state == ""
+      values.email === "" ||
+      values.fname === "" ||
+      values.address === "" ||
+      values.city === "" ||
+      values.mobile === "" ||
+      values.state === ""
     ) {
       alert("required");
     } else {

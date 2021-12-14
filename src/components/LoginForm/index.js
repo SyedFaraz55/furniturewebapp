@@ -13,12 +13,9 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import firebase from "firebase";
-
 import supabase from "../../config/supabase.config";
 
-
 import { useHistory, Link } from "react-router-dom";
-
 
 const LoginForm = () => {
   const [mobile, setMobile] = useState("");
@@ -105,11 +102,6 @@ const LoginForm = () => {
       });
   };
 
-  const createAccount = ()=> {
-    supabase.auth.signUp({email,password}).then(response => console.log(response))
-    .catch(err => console.log(err.toString()))
-  }
-
   return (
     <Container height="50vh">
       <Heading as="h1">Sign Up</Heading>
@@ -168,7 +160,7 @@ const LoginForm = () => {
               </InputGroup>
             </div>
 
-            {/* <div style={{ marginTop: 15 }}>
+            <div style={{ marginTop: 15 }}>
               <FormLabel>Mobile</FormLabel>
               <InputGroup>
                 <InputLeftAddon children="+91" />
@@ -182,7 +174,7 @@ const LoginForm = () => {
                   maxLength={10}
                 />
               </InputGroup>
-            </div> */}
+            </div>
           </div>
         )}
       </FormControl>
@@ -195,22 +187,20 @@ const LoginForm = () => {
           Verify OTP
         </Button>
       ) : (
-        <Flex alignItems="center" style={{ marginTop: 20, marginBottom:50}}>
+        <Flex style={{ marginTop: 20 }}>
           <Button
             style={{
               backgroundColor: "black",
               color: "white",
             }}
-            onClick={createAccount}
+            onClick={sendOTP}
           >
             Create Account
           </Button>
 
-
           <Link to="/login" variant="link" style={{ marginLeft: 20 }}>
             Already have an account ? Login
           </Link>
-
         </Flex>
       )}
       <div id="sign-in-button"></div>

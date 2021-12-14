@@ -107,11 +107,12 @@ const Shop = () => {
   useEffect(() => {
     console.log(items);
     commerce.products.list().then((product) => console.log(product));
+    setSize("full");
   }, [items]);
 
-  const handleSubmit = () => {
-    console.log("hit ");
-  };
+  // const handleSubmit = () => {
+  //   console.log("hit ");
+  // };
 
   return (
     <div>
