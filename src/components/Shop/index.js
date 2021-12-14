@@ -35,7 +35,7 @@ const commerce = new Commerce(
 );
 
 
-const commerce = new Commerce('pk_test_36356e81ff0bc6c1d6f99e5eccc2450557146ccab646f')
+
 const products = [
   {
     id: 1,
