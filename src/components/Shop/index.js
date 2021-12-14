@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Commerce from '@chec/commerce.js'
 import PageHeader from "../../Common/PageHeader";
 import Filter from "../../Common/Filter";
 import { Box, Heading } from "@chakra-ui/layout";
