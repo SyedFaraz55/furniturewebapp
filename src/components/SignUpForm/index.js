@@ -38,6 +38,7 @@ const SignUpForm = (props) => {
         setErrors({ message: error.message });
         setLoading(false);
       } else if (data.user) {
+        localStorage.setItem("user", JSON.stringify(data.user));
         setUser(data.user);
         window.location.href = "/";
         setLoading(false);

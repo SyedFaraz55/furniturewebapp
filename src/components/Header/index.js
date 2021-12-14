@@ -52,7 +52,10 @@ const Header = (props) => {
           {localStorage.getItem("supabase.auth.token") ? (
             <Logout />
           ) : (
-            <Link to="/login">Login/Signup</Link>
+            <>
+              <Link to="/login">Login</Link>
+              <Link to="/signup">Create Account</Link>
+            </>
           )}
         </Stack>
 

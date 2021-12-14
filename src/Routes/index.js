@@ -9,6 +9,7 @@ import Logout from "../pages/Logout";
 import Checkout from "../pages/Checkout";
 import MyAccount from "../pages/MyAccount";
 import Shop from "../components/Shop";
+import Success from "../components/Success";
 import Cart from "../pages/Cart";
 import ProtectedRoute from "../components/ProtectedRoute";
 import "../style.css";
@@ -32,6 +33,7 @@ const Routes = () => {
 
         <Route path="/logout" exact component={Logout} />
         <ProtectedRoute path="/checkout" exact component={Checkout} />
+        <ProtectedRoute path="/success" exact component={Success} />
         <WithFooter />
       </BrowserRouter>
     </>

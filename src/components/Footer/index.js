@@ -4,7 +4,9 @@ const Footer = ({ location }) => {
   if (
     location?.pathname === "/login" ||
     location?.pathname === "/cart" ||
-    location?.pathname === "/checkout"
+    location?.pathname === "/checkout" ||
+    location?.pathname === "/signup" ||
+    location?.pathname === "/account"
   ) {
     return null;
   }
