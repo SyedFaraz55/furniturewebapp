@@ -11,10 +11,9 @@ import {
   CloseButton,
   Spinner,
   Center,
-  Flex,
 } from "@chakra-ui/react";
 import supabase from "../../config/supabase.config";
-import { useHistory,Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useStoreActions } from "easy-peasy";
 const SignUpForm = (props) => {
   const [email, setEmail] = useState("");
@@ -23,7 +22,11 @@ const SignUpForm = (props) => {
   const [errors, setErrors] = useState({});
   const setUser = useStoreActions((actions) => actions.setUser);
   const history = useHistory();
-  
+  useEffect(() => {
+    if (localStorage.getItem("supabase.auth.token")) {
+      history.push("/");
+    }
+  }, [history]);
   const login = async () => {
     setLoading(true);
     if (email === "" || password === "") {
@@ -32,7 +35,6 @@ const SignUpForm = (props) => {
     } else {
       const { data, error } = await supabase.auth.signIn({ email, password });
       if (error) {
-
         setErrors({ message: error.message });
         setLoading(false);
       } else if (data.user) {
@@ -86,15 +88,12 @@ const SignUpForm = (props) => {
         />
       </FormControl>
       {!loading ? (
-        <Flex alignItems="center" mt={4}>
         <Button
-          style={{  backgroundColor: "black", color: "white" }}
+          style={{ marginTop: 20, backgroundColor: "black", color: "white" }}
           onClick={login}
         >
           Login
         </Button>
-        <Link style={{marginLeft:14}} to="/signup" >Don't have an account? Sign Up</Link>
-        </Flex>
       ) : (
         <Center style={{ marginTop: 25 }}>
           <Spinner
