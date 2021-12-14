@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-
+import Commerce from '@chec/commerce.js'
 import PageHeader from "../../Common/PageHeader";
 import Filter from "../../Common/Filter";
 import { Box, Heading } from "@chakra-ui/layout";
@@ -34,6 +34,8 @@ const commerce = new Commerce(
   "pk_test_36356e81ff0bc6c1d6f99e5eccc2450557146ccab646f"
 );
 
+
+const commerce = new Commerce('pk_test_36356e81ff0bc6c1d6f99e5eccc2450557146ccab646f')
 const products = [
   {
     id: 1,
@@ -100,11 +102,11 @@ const Shop = () => {
   const [size, setSize] = React.useState("full");
   const [current, setCurrent] = React.useState({});
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const [data,setData] = React.useState([])
   const { addItem, items } = useCart();
   const toast = useToast();
 
-  useEffect(() => {
+  useEffect(() => 
     console.log(items);
     commerce.products.list().then((product) => console.log(product));
   }, [items]);
