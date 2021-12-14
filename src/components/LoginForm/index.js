@@ -13,7 +13,6 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import firebase from "firebase";
-import firebaseConfig from "../../config/firebase";
 import supabase from "../../config/supabase.config";
 
 import { useHistory, Link } from "react-router-dom";

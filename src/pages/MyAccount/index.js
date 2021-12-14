@@ -1,4 +1,4 @@
-import { Container, Heading, Box, Text, Center } from "@chakra-ui/layout";
+import { Heading, Box, Text, Center } from "@chakra-ui/layout";
 import { Spinner } from "@chakra-ui/react";
 import React from "react";
 import supabase from "../../config/supabase.config";
