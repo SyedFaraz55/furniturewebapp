@@ -66,7 +66,7 @@ const CheckOut = () => {
       return;
     }
     const data = await axios
-      .post("http://localhost:8080/razorpay", {
+      .post("https://mysterious-falls-52128.herokuapp.com/razorpay", {
         amount: subTotal,
         items: items,
         name: details?.fname,
