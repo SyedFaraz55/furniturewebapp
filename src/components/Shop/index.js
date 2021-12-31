@@ -101,7 +101,7 @@ const Shop = () => {
   const [current, setCurrent] = React.useState({});
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const { addItem, items } = useCart();
+  const { addItem, items, updateItemQuantity } = useCart();
   const toast = useToast();
 
   useEffect(() => {
@@ -161,44 +161,11 @@ const Shop = () => {
                     minimumFractionDigits: 2,
                   })}
                 </Text>
-                <Flex alignItems="center" mt={4}>
-                  <Button
-                    borderRadius="full"
-                    color="blackAlpha.900"
-                    size="xs"
-                    onClick={() => {
-                      setCurrent((prevState) => ({
-                        ...prevState,
-                        quantity: current["quantity"]
-                          ? (current["quantity"] += 1)
-                          : (current["quantity"] = 1),
-                      }));
-                    }}
-                  >
-                    <IoIosAdd size={15} />
-                  </Button>{" "}
-                  <Text ml={2} mr={2}>
-                    {current.quantity || 0}
-                  </Text>
-                  <Button
-                    borderRadius="full"
-                    color="blackAlpha.900"
-                    size="xs"
-                    onClick={() => {
-                      setCurrent((prevState) => ({
-                        ...prevState,
-                        quantity: current["quantity"]
-                          ? (current["quantity"] -= 1)
-                          : (current["quantity"] = 1),
-                      }));
-                    }}
-                  >
-                    <AiOutlineMinus size={15} />
-                  </Button>
-                </Flex>
+
                 <Button
                   onClick={() => {
-                    if (current.quantity) {
+                    console.log(current, "check");
+                    if (current.quantity > 0) {
                       addItem(current);
                       toast({
                         title: "Item added to cart",
@@ -206,7 +173,7 @@ const Shop = () => {
                       });
                     } else {
                       toast({
-                        title: "Please a product to cart",
+                        title: "Please select the quantity",
                         status: "error",
                         position: "top",
                       });

@@ -15,14 +15,14 @@ const Featured = () => {
         <h3>Great deals for great prices</h3>
       </div>
       <div id="featured">
-        <ProductCard price={1700} image={p9} />
+        <ProductCard
+          price={1700}
+          image={p9}
+          onClick={() => (window.location.href = "/shop")}
+        />
         <ProductCard price={1700} image={p8} />
         <ProductCard price={1700} image={p7} />
         <ProductCard price={1700} image={p6} />
-        <ProductCard price={1700} image={p2} />
-        <ProductCard price={1700} image={p5} />
-        <ProductCard price={1700} image={p4} />
-        <ProductCard price={1700} image={p1} />
       </div>
     </div>
   );
