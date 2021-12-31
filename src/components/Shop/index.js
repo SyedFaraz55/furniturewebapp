@@ -17,8 +17,6 @@ import {
   UnorderedList,
   ListItem,
 } from "@chakra-ui/react";
-import { IoIosAdd } from "react-icons/io";
-import { AiOutlineMinus } from "react-icons/ai";
 import { useCart } from "react-use-cart";
 import ProductCard from "../ProductCard";
 import product1 from "../../resources/products/product1.jpeg";
@@ -101,7 +99,7 @@ const Shop = () => {
   const [current, setCurrent] = React.useState({});
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const { addItem, items, updateItemQuantity } = useCart();
+  const { addItem, items } = useCart();
   const toast = useToast();
 
   useEffect(() => {
