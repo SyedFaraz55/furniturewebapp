@@ -120,6 +120,7 @@ const Shop = () => {
         {products.map((product) => {
           return (
             <ProductCard
+              cart={true}
               onClick={() => {
                 onOpen();
                 setCurrent(product);
@@ -162,8 +163,7 @@ const Shop = () => {
 
                 <Button
                   onClick={() => {
-                    console.log(current, "check");
-                    if (current.quantity > 0) {
+                    if (items.indexOf(current) > -1) {
                       addItem(current);
                       toast({
                         title: "Item added to cart",
@@ -171,9 +171,8 @@ const Shop = () => {
                       });
                     } else {
                       toast({
-                        title: "Please select the quantity",
+                        title: "Item already in cart",
                         status: "error",
-                        position: "top",
                       });
                     }
                   }}
