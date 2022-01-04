@@ -1,11 +1,12 @@
 import { Box, Container, Heading, Flex } from "@chakra-ui/layout";
-import { Image, Text, Button, Link, Divider } from "@chakra-ui/react";
+import { Image, Text, Button, Divider } from "@chakra-ui/react";
 import { BiRupee } from "react-icons/bi";
 import React, { useEffect, useState } from "react";
 import { useCart } from "react-use-cart";
 import { IoIosAdd } from "react-icons/io";
 import { AiOutlineMinus } from "react-icons/ai";
 import { Alert, AlertIcon, AlertTitle, CloseButton } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 const Cart = () => {
   const { totalItems, items, updateItemQuantity, removeItem, isEmpty } =
     useCart();
@@ -134,7 +135,7 @@ const Cart = () => {
             <Alert status="info">
               <AlertIcon />
               <AlertTitle mr={2}>Please login to continue</AlertTitle>
-              <Link ml={10} href="/login">
+              <Link ml={10} to="/login">
                 Login
               </Link>
               <CloseButton position="absolute" right="8px" top="8px" />
