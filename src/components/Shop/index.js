@@ -28,6 +28,7 @@ import product6 from "../../resources/products/product6.jpeg";
 import product7 from "../../resources/products/product7.jpeg";
 import product8 from "../../resources/products/product8.jpeg";
 import Commerce from "@chec/commerce.js";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 const commerce = new Commerce(
   "pk_test_36356e81ff0bc6c1d6f99e5eccc2450557146ccab646f"
 );
@@ -152,8 +153,13 @@ const Shop = () => {
                   alt={current.name}
                 />
               </Box>
-              <Box ml={10}>
-                <Heading as="h5">{current.name}</Heading>
+              <Box ml={10} style={{ cursor: "pointer" }}>
+                <Flex alignItems="center">
+                  <Heading as="h5">{current.name}</Heading>
+                  <Box ml={20} onClick={onClose}>
+                    <AiOutlineCloseCircle size={30} />
+                  </Box>
+                </Flex>
                 <Text mt={2} style={{ fontSize: 24 }}>
                   Rs.{" "}
                   {current?.price?.toLocaleString(navigator.language, {
