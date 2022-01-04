@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   FormControl,
   FormLabel,
@@ -14,16 +14,15 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import supabase from "../../config/supabase.config";
-import { useHistory,Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useStoreActions } from "easy-peasy";
-const SignUpForm = (props) => {
+const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const setUser = useStoreActions((actions) => actions.setUser);
-  const history = useHistory();
-  
+
   const login = async () => {
     setLoading(true);
     if (email === "" || password === "") {
@@ -32,7 +31,6 @@ const SignUpForm = (props) => {
     } else {
       const { data, error } = await supabase.auth.signIn({ email, password });
       if (error) {
-
         setErrors({ message: error.message });
         setLoading(false);
       } else if (data.user) {
@@ -87,13 +85,15 @@ const SignUpForm = (props) => {
       </FormControl>
       {!loading ? (
         <Flex alignItems="center" mt={4}>
-        <Button
-          style={{  backgroundColor: "black", color: "white" }}
-          onClick={login}
-        >
-          Login
-        </Button>
-        <Link style={{marginLeft:14}} to="/signup" >Don't have an account? Sign Up</Link>
+          <Button
+            style={{ backgroundColor: "black", color: "white" }}
+            onClick={login}
+          >
+            Login
+          </Button>
+          <Link style={{ marginLeft: 14 }} to="/signup">
+            Don't have an account? Sign Up
+          </Link>
         </Flex>
       ) : (
         <Center style={{ marginTop: 25 }}>
