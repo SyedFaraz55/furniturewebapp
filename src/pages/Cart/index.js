@@ -26,6 +26,7 @@ const Cart = () => {
     }
   };
 
+  console.log(JSON.parse(localStorage.getItem("cart")), "items ");
   if (isEmpty) {
     return (
       <Container centerContent>

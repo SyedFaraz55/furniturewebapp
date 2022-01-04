@@ -17,8 +17,6 @@ import {
   UnorderedList,
   ListItem,
 } from "@chakra-ui/react";
-import { IoIosAdd } from "react-icons/io";
-import { AiOutlineMinus } from "react-icons/ai";
 import { useCart } from "react-use-cart";
 import ProductCard from "../ProductCard";
 import product1 from "../../resources/products/product1.jpeg";
@@ -122,6 +120,7 @@ const Shop = () => {
         {products.map((product) => {
           return (
             <ProductCard
+              cart={true}
               onClick={() => {
                 onOpen();
                 setCurrent(product);
@@ -161,44 +160,10 @@ const Shop = () => {
                     minimumFractionDigits: 2,
                   })}
                 </Text>
-                <Flex alignItems="center" mt={4}>
-                  <Button
-                    borderRadius="full"
-                    color="blackAlpha.900"
-                    size="xs"
-                    onClick={() => {
-                      setCurrent((prevState) => ({
-                        ...prevState,
-                        quantity: current["quantity"]
-                          ? (current["quantity"] += 1)
-                          : (current["quantity"] = 1),
-                      }));
-                    }}
-                  >
-                    <IoIosAdd size={15} />
-                  </Button>{" "}
-                  <Text ml={2} mr={2}>
-                    {current.quantity || 0}
-                  </Text>
-                  <Button
-                    borderRadius="full"
-                    color="blackAlpha.900"
-                    size="xs"
-                    onClick={() => {
-                      setCurrent((prevState) => ({
-                        ...prevState,
-                        quantity: current["quantity"]
-                          ? (current["quantity"] -= 1)
-                          : (current["quantity"] = 1),
-                      }));
-                    }}
-                  >
-                    <AiOutlineMinus size={15} />
-                  </Button>
-                </Flex>
+
                 <Button
                   onClick={() => {
-                    if (current.quantity) {
+                    if (items.indexOf(current) > -1) {
                       addItem(current);
                       toast({
                         title: "Item added to cart",
@@ -206,9 +171,8 @@ const Shop = () => {
                       });
                     } else {
                       toast({
-                        title: "Please a product to cart",
+                        title: "Item already in cart",
                         status: "error",
-                        position: "top",
                       });
                     }
                   }}
